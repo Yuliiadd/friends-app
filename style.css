@@ -425,7 +425,6 @@ input[type="radio"]:checked + .radio__label {
 }
 
 .aside__button:hover {
-    /* background-color: #6afc46; */
     background-color: #6d47f7;
     color: white;
     font-weight: 700;
@@ -467,7 +466,7 @@ input[type="radio"]:checked + .radio__label {
 }
 
 .sort:hover {
-    border: 1px solid #6d47f7;
+    border: 1px solid #6d47f78e;
     width: 25px;
     height: 25px;
 }
