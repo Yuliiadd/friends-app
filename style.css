@@ -337,11 +337,11 @@ input[type="radio"]:checked + .radio__label {
 
 .grid__wrapper {
     display: grid;
-    grid-template-columns: repeat(4, 250px);
+    grid-template-columns: repeat(3, 250px);
     grid-template-rows: repeat(4, 400px);
     grid-auto-rows: 400px;
     gap: 25px;
-    width: 1100px;
+    width: 800px;
     margin: 15px auto;
 
 }
@@ -472,12 +472,14 @@ input[type="radio"]:checked + .radio__label {
     border: 1px solid #6d47f78e;
     width: 25px;
     height: 25px;
+    transition: 0.5s;
 }
 
 .sort_active {
     border: 1px solid #6d47f7;
     width: 25px;
     height: 25px;
+    transition: 0.5s;
 }
 
 .sort-up {
