@@ -57,6 +57,7 @@ firstScreenForm.addEventListener('submit', function(e) {
         break;
     };
     getUsers();
+    console.log(filters)
 });
 
 function getUsers() {
@@ -66,6 +67,7 @@ function getUsers() {
         .then(users => {
             allUsers = [...users.results];
             filtredUsers = filterByAge(filterBySex(allUsers));
+            console.log(filtredUsers);
             renderCards(filtredUsers);
         })
         .catch(function() {
@@ -151,7 +153,7 @@ function filterByName(user, name) {
 }
 
 function filterBySex(arr) {
-    if (filters.sex) {
+    if (filters.sex == "male" || filters.sex == "female" ) {
         return arr.filter(user => user.gender == filters.sex)
     } else {
         return arr;
@@ -198,8 +200,6 @@ function searchName() {
 
     }
 }
-
-
 
 function resetForm() {
     filters = {
