@@ -1,18 +1,20 @@
 "use strict"
 
-const cardsSection = document.querySelector('.grid__wrapper');
 const url = "https://randomuser.me/api/?results=200";
 let requestErrorsCounter = 0;
-let allUsers;
-let filtredUsers;
+const cardsSection = document.querySelector('.grid__wrapper');
 const firstScreen = document.querySelector('.form__wrapper');
+const mainScreen = document.querySelector('.wrapper');
 const firstScreenForm = document.querySelector('.form_first-screen');
 const aside = document.querySelector('.aside');
-let min = document.querySelector('input[id="aside_input-min"]'); 
-let max = document.querySelector('input[id="aside_input-max"]');
 const search = document.querySelector('#search');
 const resetFormBtn = document.querySelector('.aside__button');
 const sortBtns = document.querySelectorAll('.sort');
+
+let min = document.querySelector('input[id="aside_input-min"]'); 
+let max = document.querySelector('input[id="aside_input-max"]');
+let allUsers;
+let filtredUsers;
 let filters = {
     name: '',
     sex: '',
@@ -22,6 +24,7 @@ let filters = {
 };
 
 aside.addEventListener('click', getFiltredUsers);
+mainScreen.addEventListener('click', showFilters);
 aside.addEventListener('input', getFiltredUsersByAgeRange);
 search.addEventListener('input', searchName);
 resetFormBtn.addEventListener('click', resetForm);
@@ -57,7 +60,6 @@ firstScreenForm.addEventListener('submit', function(e) {
         break;
     };
     getUsers();
-    console.log(filters)
 });
 
 function getUsers() {
@@ -67,12 +69,12 @@ function getUsers() {
         .then(users => {
             allUsers = [...users.results];
             filtredUsers = filterByAge(filterBySex(allUsers));
-            console.log(filtredUsers);
             renderCards(filtredUsers);
+            firstScreen.style.display = "none";
+            aside.style.display = "block";
         })
         .catch(function() {
             requestErrorsCounter++;
-            console.log(requestErrorsCounter);
             if (requestErrorsCounter < 5) {
                 getUsers();
             } else {
@@ -82,8 +84,6 @@ function getUsers() {
 }
 
 function renderCards(usersArr) {
-    firstScreen.style.display = "none";
-    aside.style.display = "block";
     cardsSection.innerHTML = "";
     usersArr.forEach(user => {
         new Card(user).render();
@@ -189,7 +189,6 @@ function sortByAge(arr) {
 
 function searchName() {
     filters.name = search.value.toLowerCase();
-    console.log(filters.name);
     if (filters.name) {
         filtredUsers = filterBySex(filterByAge(allUsers));
         filtredUsers = filtredUsers.filter(user => filterByName(user, filters.name));
@@ -197,7 +196,6 @@ function searchName() {
     } else {
         filtredUsers = filterBySex(filterByAge(allUsers));
         renderCards(filtredUsers);
-
     }
 }
 
@@ -215,4 +213,22 @@ function resetForm() {
     sortBtns.forEach(btn => {btn.classList.remove('sort_active')});
     filtredUsers = allUsers.sort(() =>  Math.random() - 0.5);
     renderCards(filtredUsers);
+}
+
+function showFilters(e) {
+    if (window.innerWidth < 767) {
+        if (e.target.className == "form_aside") {
+            aside.classList.add('show-aside');
+        } else if (!aside.contains(e.target)) {
+            aside.classList.remove('show-aside');
+        }
+    }
+
+    // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    //     if (e.target.className == "") {
+    //         aside.classList.add('show-aside');
+    //     } else {
+    //         aside.classList.remove('show-aside');
+    //     }
+    // }
 }
