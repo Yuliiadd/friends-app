@@ -161,6 +161,8 @@ function filterBySex(arr) {
 }
 
 function filterByAge(arr) {
+    !filters.minAge ?  filters.minAge = 18 : filters.minAge; 
+    !filters.maxAge ?  filters.maxAge = 120 : filters.maxAge; 
     return arr.filter(user => user.dob.age >= filters.minAge && user.dob.age <= filters.maxAge);
 }
 
@@ -223,12 +225,4 @@ function showFilters(e) {
             aside.classList.remove('show-aside');
         }
     }
-
-    // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    //     if (e.target.className == "") {
-    //         aside.classList.add('show-aside');
-    //     } else {
-    //         aside.classList.remove('show-aside');
-    //     }
-    // }
 }
