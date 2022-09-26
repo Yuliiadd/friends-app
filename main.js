@@ -105,44 +105,44 @@ function getFiltredUsers(e) {
     switch (e.target.id) {
         case 'female_aside':
             filters.sex = 'female';
-            filtredUsers = filterBySex(filterByAge(allUsers))
             break;
         case 'male_aside':
             filters.sex = 'male';
-            filtredUsers = filterBySex(filterByAge(allUsers));
             break;
         case 'all_aside':
             filters.sex = null;
-            filtredUsers = filterBySex(filterByAge(allUsers));
             break;    
         case 'a-z':
             sortBtns.forEach(btn => {btn.classList.remove('sort_active')});
             filters.sort = "a-z";
-            filtredUsers = sortByName(filterBySex(filterByAge(allUsers)));
+            filtredUsers = sortByName(allUsers);
             e.target.classList.add('sort_active');
             break;
         case 'z-a':
             sortBtns.forEach(btn => {btn.classList.remove('sort_active')});
             filters.sort = "z-a";
-            filtredUsers = sortByName(filterBySex(filterByAge(allUsers)));
+            filtredUsers = sortByName(allUsers);
             e.target.classList.add('sort_active');
             break;
         case '1-9':
             sortBtns.forEach(btn => {btn.classList.remove('sort_active')});
             filters.sort = "1-9";
-            filtredUsers = sortByAge(filterBySex(filterByAge(allUsers)));
+            filtredUsers = sortByAge(allUsers);
             e.target.classList.add('sort_active');
             break;
         case '9-1':
             sortBtns.forEach(btn => {btn.classList.remove('sort_active')});
             filters.sort = "9-1";
-            filtredUsers = sortByAge(filterBySex(filterByAge(allUsers)));
+            filtredUsers = sortByAge(allUsers);
             e.target.classList.add('sort_active');
             break;
             
             default:
             break;
     }
+
+    filtredUsers = filterBySex(filterByAge(allUsers));
+    filters.name ? searchName() : filtredUsers;
     renderCards(filtredUsers);
 }
 
