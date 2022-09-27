@@ -10,6 +10,7 @@ const aside = document.querySelector('.aside');
 const search = document.querySelector('#search');
 const resetFormBtn = document.querySelector('.aside__button');
 const sortBtns = document.querySelectorAll('.sort');
+const navigation = document.querySelector('.bottom__menu');
 
 let min = document.querySelector('input[id="aside_input-min"]'); 
 let max = document.querySelector('input[id="aside_input-max"]');
@@ -25,6 +26,7 @@ let filters = {
 
 aside.addEventListener('click', getFiltredUsers);
 mainScreen.addEventListener('click', showFilters);
+mainScreen.addEventListener('mousemove', showBotoomMenu);
 aside.addEventListener('input', getFiltredUsersByAgeRange);
 search.addEventListener('input', searchName);
 resetFormBtn.addEventListener('click', resetForm);
@@ -225,4 +227,20 @@ function showFilters(e) {
             aside.classList.remove('show-aside');
         }
     }
+}
+
+function showBotoomMenu(e) {
+    const showMenuArea = {
+        x: 400,
+        y: 550
+    }
+    let mouseX = e.clientX;
+    let mouseY = e.clientY;
+    
+    if (mouseX > showMenuArea.x && mouseY > showMenuArea.y) {
+        navigation.classList.add('menu__up');
+    } else {
+        navigation.classList.remove('menu__up');
+    }
+
 }
