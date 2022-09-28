@@ -1,7 +1,5 @@
 "use strict"
 
-// variables 
-const url = "https://randomuser.me/api/?results=200";
 let requestErrorsCounter = 0;
 const cardsSection = document.querySelector('.grid__wrapper');
 const firstScreen = document.querySelector('.form__wrapper');
@@ -25,7 +23,6 @@ let filters = {
     sort: '',
 };
 
-// event listeners 
 aside.addEventListener('click', getFiltredUsers);
 mainScreen.addEventListener('click', showFilters);
 mainScreen.addEventListener('mousemove', showBotoomMenu);
@@ -34,7 +31,6 @@ search.addEventListener('input', searchName);
 resetFormBtn.addEventListener('click', resetForm);
 firstScreenForm.addEventListener('submit', getDataFromFirstForm);
 
-// a function that takes data from the first form and transfers it to a field with filters, then calls a function with a request to the server
 function getDataFromFirstForm(e) {
     e.preventDefault(); 
     filters.sex = document.querySelector('input[name="sex"]:checked').id;
@@ -71,8 +67,8 @@ function getDataFromFirstForm(e) {
     aside.style.display = "block";
 };
 
-// function that create request to the server, process the response and display filtred users. 
 function getUsers() {
+    const url = "https://randomuser.me/api/?results=200";
     const promise = fetch(url);
     return promise
         .then(data => data.json())
@@ -91,7 +87,6 @@ function getUsers() {
         });
 };
 
-// render users cards using users array and class Card
 function renderCards(usersArr) {
     cardsSection.innerHTML = "";
     usersArr.forEach(user => {
@@ -233,7 +228,7 @@ function showFilters(e) {
         }
     }
 }
-// show to user the bottom menu when the mouse cursor approaches the bottom of the page
+
 function showBotoomMenu(e) {
     const showMenuArea = {
         x: 400,

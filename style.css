@@ -801,7 +801,6 @@ and (max-width: 767px) {
         background-repeat: no-repeat;
         left: 10px;
         top: 10px;
-    
     }
     
     .card:hover::before {
@@ -1037,8 +1036,4 @@ and (max-width: 767px) {
         height: 40px;
         margin: 0 10px;
     }
-
-    
 }
-
-
