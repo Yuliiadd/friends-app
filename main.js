@@ -1,5 +1,6 @@
 "use strict"
 
+// variables 
 const url = "https://randomuser.me/api/?results=200";
 let requestErrorsCounter = 0;
 const cardsSection = document.querySelector('.grid__wrapper');
@@ -24,13 +25,17 @@ let filters = {
     sort: '',
 };
 
+// event listeners 
 aside.addEventListener('click', getFiltredUsers);
 mainScreen.addEventListener('click', showFilters);
 mainScreen.addEventListener('mousemove', showBotoomMenu);
 aside.addEventListener('input', getFiltredUsersByAgeRange);
 search.addEventListener('input', searchName);
 resetFormBtn.addEventListener('click', resetForm);
-firstScreenForm.addEventListener('submit', function(e) {
+firstScreenForm.addEventListener('submit', getDataFromFirstForm);
+
+// a function that takes data from the first form and transfers it to a field with filters, then calls a function with a request to the server
+function getDataFromFirstForm(e) {
     e.preventDefault(); 
     filters.sex = document.querySelector('input[name="sex"]:checked').id;
     filters.minAge = document.querySelector('input[id="input-min"]').value;
@@ -62,8 +67,11 @@ firstScreenForm.addEventListener('submit', function(e) {
         break;
     };
     getUsers();
-});
+    firstScreen.style.display = "none";
+    aside.style.display = "block";
+};
 
+// function that create request to the server, process the response and display filtred users. 
 function getUsers() {
     const promise = fetch(url);
     return promise
@@ -72,8 +80,6 @@ function getUsers() {
             allUsers = [...users.results];
             filtredUsers = filterByAge(filterBySex(allUsers));
             renderCards(filtredUsers);
-            firstScreen.style.display = "none";
-            aside.style.display = "block";
         })
         .catch(function() {
             requestErrorsCounter++;
@@ -83,8 +89,9 @@ function getUsers() {
                 console.log(Error("Помилка серверу. Перезапустіть сторінку."))
             }
         });
-}
+};
 
+// render users cards using users array and class Card
 function renderCards(usersArr) {
     cardsSection.innerHTML = "";
     usersArr.forEach(user => {
@@ -93,7 +100,6 @@ function renderCards(usersArr) {
 };
 
 // sorting & filters
-
 function getFiltredUsersByAgeRange(e) {
     if (e.target.id == "aside_input-min" || e.target.id == "aside_input-max") {
         filters.minAge = document.querySelector('input[id="aside_input-min"]').value;
@@ -142,7 +148,6 @@ function getFiltredUsers(e) {
             default:
             break;
     }
-
     filtredUsers = filterBySex(filterByAge(allUsers));
     filters.name ? searchName() : filtredUsers;
     renderCards(filtredUsers);
@@ -228,7 +233,7 @@ function showFilters(e) {
         }
     }
 }
-
+// show to user the bottom menu when the mouse cursor approaches the bottom of the page
 function showBotoomMenu(e) {
     const showMenuArea = {
         x: 400,
