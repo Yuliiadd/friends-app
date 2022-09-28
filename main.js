@@ -63,8 +63,6 @@ function getDataFromFirstForm(e) {
         break;
     };
     getUsers();
-    firstScreen.style.display = "none";
-    aside.style.display = "block";
 };
 
 function getUsers() {
@@ -76,6 +74,7 @@ function getUsers() {
             allUsers = [...users.results];
             filtredUsers = filterByAge(filterBySex(allUsers));
             renderCards(filtredUsers);
+            firstScreen.classList.add("hidden");
         })
         .catch(function() {
             requestErrorsCounter++;
