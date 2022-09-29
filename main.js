@@ -15,8 +15,8 @@ const submitBtn = document.querySelector('.submit');
 
 let min = document.querySelector('input[id="aside_input-min"]'); 
 let max = document.querySelector('input[id="aside_input-max"]');
-let allUsers;
-let filtredUsers;
+let allUsers = [];
+let filtredUsers = [];
 let filters = {
     name: '',
     sex: '',
