@@ -233,7 +233,17 @@ input[type="radio"]:checked + .radio__label {
    margin-top: 22px;
    border-radius: 20px;
 }
+.loading__animation {
+    display: none;
+    width: 30px;
+    position: absolute;
+    left: 150px;
+    bottom: 35px;
+}
 
+.visible {
+    display: block;
+}
 /* main content */
 
 .wrapper {
@@ -704,8 +714,6 @@ and (max-width: 1199px) {
 
     .radio__btns {
         display: flex;
-        flex-direction: column;
-        align-items:flex-start;
         margin-top: 5px;
     }
 
@@ -1039,5 +1047,10 @@ and (max-width: 767px) {
         width: 40px;
         height: 40px;
         margin: 0 10px;
+    }
+
+    .loading__animation {
+        left: 115px;
+        bottom: 20px;
     }
 }
