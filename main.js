@@ -196,10 +196,17 @@ function sortByAge(arr) {
 
 function searchName() {
     filters.name = search.value.toLowerCase();
+    const header = document.querySelector('.header');
     if (filters.name) {
         filtredUsers = filterBySex(filterByAge(allUsers));
         filtredUsers = filtredUsers.filter(user => filterByName(user, filters.name));
-        renderCards(filtredUsers);
+        if (filtredUsers.length) {
+            header.classList.remove('no-results');
+            renderCards(filtredUsers);
+        } else {
+            cardsSection.innerHTML = "";
+            header.classList.add('no-results');
+        }
     } else {
         filtredUsers = filterBySex(filterByAge(allUsers));
         renderCards(filtredUsers);
