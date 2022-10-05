@@ -792,6 +792,10 @@ and (max-width: 1199px) {
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
+    .user__photo {
+        overflow: hidden;
+    }
+
     .info {
         font-size: 20px;
         width:100%;
@@ -816,10 +820,12 @@ and (max-width: 1199px) {
     }
 
     .additional__info {
-        left: 31px;
+        left:0;
         bottom: 0px;
         font-size: 18px;
         white-space: nowrap;
+        width: 100%;
+        text-align:center; 
     }
 }
 
@@ -1101,7 +1107,9 @@ and (max-width: 767px) {
     .additional__info {
         font-size: 8px;
         bottom: -1px;
-        transform: translateX(-50%);
+        width:100%;
+        left: 0;
+        text-align:center; 
         white-space: nowrap;
     }
 
